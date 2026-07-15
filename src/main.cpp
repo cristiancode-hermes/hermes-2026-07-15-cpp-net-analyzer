@@ -33,8 +33,7 @@ static void print_interfaces_table(const std::vector<InterfaceStats>& ifaces) {
   std::println(std::cout, "{:<12} {:>12} {:>12} {:>12} {:>12} {:>10} {:>6} {:>6}",
                "INTERFACE", "RX_BYTES", "TX_BYTES", "RX_PKTS", "TX_PKTS", "RX_ERR", "TX_ERR", "DROP");
 
-  std::println(std::cout, "{}", std::string(80, '─'));
-
+  std::println(std::cout, "{}", std::string(80, '-'));
   for (const auto& iface : ifaces) {
     // Skip loopback unless verbose
     if (iface.name == "lo") continue;
@@ -55,7 +54,7 @@ static void print_connections_table(const std::vector<TcpConnection>& conns) {
   std::println(std::cout, "{:<5} {:<22} {:<22} {:<12} {:<6} {:<10}",
                "SLOT", "LOCAL", "REMOTE", "STATE", "UID", "PROCESS");
 
-  std::println(std::cout, "{}", std::string(85, '─'));
+  std::println(std::cout, "{}", std::string(85, '-'));
 
   for (const auto& c : conns) {
     std::println(std::cout, "{:<5} {:<22} {:<22} {:<12} {:<6} {:<10}",
@@ -71,7 +70,7 @@ static void print_bandwidth_table(const std::vector<BandwidthDelta>& deltas) {
   std::println(std::cout, "{:<12} {:>14} {:>14} {:>14}",
                "INTERFACE", "RX_RATE", "TX_RATE", "TOTAL_RATE");
 
-  std::println(std::cout, "{}", std::string(58, '─'));
+  std::println(std::cout, "{}", std::string(58, '-'));
 
   double total_rx = 0, total_tx = 0;
   for (const auto& d : deltas) {
@@ -83,7 +82,7 @@ static void print_bandwidth_table(const std::vector<BandwidthDelta>& deltas) {
     total_tx += d.tx_kbps;
   }
 
-  std::println(std::cout, "{}", std::string(58, '─'));
+  std::println(std::cout, "{}", std::string(58, '-'));
   std::println(std::cout, "{:<12} {:>14} {:>14} {:>14}",
                "TOTAL", human_rate(total_rx), human_rate(total_tx),
                human_rate(total_rx + total_tx));
