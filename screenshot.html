@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.terminal{
+  background:#161b22;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5);
+  font-family:'JetBrains Mono','Fira Code',monospace;font-size:14px;line-height:1.5;width:100%;max-width:820px;
+  border:1px solid rgba(255,255,255,.08)
+}
+.terminal-header{background:#1c2333;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.terminal-dot{width:12px;height:12px;border-radius:50%}
+.terminal-dot.r{background:#ff5f56}
+.terminal-dot.y{background:#ffbd2e}
+.terminal-dot.g{background:#27c93f}
+.terminal-title{color:#8b949e;font-size:12px;text-align:center;flex:1;margin-right:42px}
+.terminal-body{padding:20px;color:#e6edf3;white-space:pre;overflow-x:auto}
+.cmd{color:#58a6ff;font-weight:600}
+.str{color:#a5d6ff}
+.num{color:#f0883e}
+.dim{color:#8b949e}
+.green{color:#3fb950}
+.yellow{color:#d29922}
+.red{color:#f85149}
+.purple{color:#bc8cff}
+.sep{border:none;border-top:1px solid rgba(255,255,255,.06);margin:12px 0}
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="terminal-header">
+    <div class="terminal-dot r"></div>
+    <div class="terminal-dot y"></div>
+    <div class="terminal-dot g"></div>
+    <div class="terminal-title">net-analyzer — build & run</div>
+  </div>
+  <div class="terminal-body">$ <span class="cmd">cmake -G "Unix Makefiles" -S . -B build -DCMAKE_BUILD_TYPE=Debug</span>
+<span class="dim">-- The CXX compiler identification is GNU 14.2.0</span>
+<span class="dim">-- Detecting CXX compiler ABI info - done</span>
+<span class="dim">-- Configuring done (35.7s)</span>
+<span class="dim">-- Generating done (0.1s)</span>
+<span class="green">✓ Build files written to build/</span>
+
+$ <span class="cmd">cmake --build build -j$(nproc)</span>
+<span class="dim">[ 98%] Linking CXX executable net-analyzer</span>
+<span class="dim">[100%] Built target net-analyzer</span>
+
+$ <span class="cmd">./build/net-analyzer</span>
+<span class="purple">Net Analyzer — Interface Statistics</span>
+<span class="dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+INTERFACE        <span class="str">RX_BYTES</span>     <span class="str">TX_BYTES</span>    <span class="str">RX_PKTS</span>    <span class="str">TX_PKTS</span>   <span class="str">RX_ERR</span> <span class="str">TX_ERR</span> <span class="str">DROP</span>
+<span class="dim">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+lo             <span class="num">247.9 MiB</span>       <span class="num">0.0 B</span>    <span class="num">348247</span>         <span class="num">0</span>      <span class="num">0</span>     <span class="num">0</span>    <span class="num">0</span>
+eth0           <span class="num">8.3 GiB</span>        <span class="num">0.0 B</span>   <span class="num">2364751</span>        <span class="num">0</span>      <span class="num">0</span>     <span class="num">0</span>    <span class="num">0</span>
+
+$ <span class="cmd">./build/net-analyzer --connections --json | python3 -m json.tool | head -15</span>
+[
+  {
+    <span class="str">"local_address"</span>: <span class="str">"0.0.0.0"</span>,
+    <span class="str">"local_port"</span>: <span class="num">4860</span>,
+    <span class="str">"remote_address"</span>: <span class="str">"0.0.0.0"</span>,
+    <span class="str">"state"</span>: <span class="str">"LISTEN"</span>,
+    <span class="str">"uid"</span>: <span class="num">0</span>
+  },
+  {
+    <span class="str">"local_address"</span>: <span class="str">"172.16.1.2"</span>,
+    <span class="str">"local_port"</span>: <span class="num">32794</span>,
+    <span class="str">"state"</span>: <span class="str">"ESTABLISHED"</span>
+
+$ <span class="cmd">./build/tests/test_suite</span>
+<span class="dim">All tests passed (30 assertions in 12 test cases)</span>
+
+$ <span class="green">✓ net-analyzer — compilación y tests exitosos</span>
+</div>
+</div>
+</body>
+</html>
